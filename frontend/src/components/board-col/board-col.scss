@@ -1,0 +1,64 @@
+@import '../../styles/root';
+
+.board-col {
+    position: relative;
+    background-color: $grey_light_super;
+    border-radius: $bdrs;
+    border: 1px solid $grey_light_easy;
+    display: flex;
+    flex-direction: column;
+
+    &.is_from {
+        border-color: $secondary;
+
+        & .board-col__header {
+            background-color: $secondary;
+            color: #fff;
+        }
+    }
+
+    &.is_active {
+        border-color: $primary;
+
+        & .board-col__header {
+            background-color: $primary;
+            color: #fff;
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        padding: 10px 15px;
+        border-bottom: 1px solid $grey_light_easy;    
+    }
+
+    &__title {
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    &__count {
+        position: absolute;
+        top: -5px;
+        right: -10px;
+        background-color: $purple;
+        padding: 0 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #fff;
+        font-weight: bold;
+
+        &:before {
+            position: absolute;
+            content: '';
+            top: calc(100% - 1px);
+            right: -10px;
+            border: 10px solid transparent;
+            border-left-color: darken($purple, 10%); 
+            border-top-width: 0;
+            z-index: -1;
+        }
+    }
+}

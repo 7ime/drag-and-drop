@@ -1,0 +1,23 @@
+.segment {
+    border: 1px solid $grey_light_easy;
+    background-color: #fff;
+
+    &__section {
+        padding: 1.5rem 2rem;
+        border-bottom: 1px solid $grey_light_super;
+    
+        &:last-child {
+            border-bottom: none;
+        }
+    }
+
+    &_middle {
+        & .segment__section {
+            padding: 1.5rem 2rem;
+        }
+    }
+
+    &__title {
+        padding-bottom: 2rem;
+    }
+}

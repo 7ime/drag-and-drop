@@ -1,0 +1,41 @@
+.flash {
+    border: 1px solid transparent;
+    border-radius: $bdrs;
+    padding: 1rem 1.5rem;
+    font-size: 1.3rem;
+
+    &_error {
+        border-color: $red_light;
+        background-color: $red_light_easy;
+    }
+
+    &_success {
+        border-color: $green_light;
+        background-color: $green_light_super;
+    }
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__subtitle {
+
+    }
+
+    &__list {
+        margin: 1.5rem 0 0;
+        padding: 0 0 0 2.5rem;
+    }
+
+    &__info {
+        margin-top: 1.5rem;
+
+        & p {
+            margin: 0 0 1rem;
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

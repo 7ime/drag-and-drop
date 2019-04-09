@@ -1,0 +1,27 @@
+.danger {
+    &_light {
+        & .danger__title {
+            color: $green_dark;
+        }
+    }
+
+    &_middle {
+        & .danger__title {
+            color: $orange;
+        }
+    }
+
+    &_high {
+        & .danger__title {
+            color: $red;
+        }
+    }
+
+    &__title {
+        font-weight: bold;
+    }
+
+    &__from {
+        margin-top: 0.5rem;
+    }
+}

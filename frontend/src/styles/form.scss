@@ -1,0 +1,65 @@
+.form {
+    &__header {
+        margin-bottom: 1.5rem;
+    }
+
+    &__body {
+        padding-top: 2rem;
+    }
+
+    &__title {
+        padding-bottom: 0.5rem;
+    }
+
+    &__description {
+        font-size: 1.4rem;
+        line-height: 1.6rem;
+        color: $grey_light;
+    }
+
+    &__row {
+
+    }
+
+    &__col {
+
+    }
+
+    &__field {
+        
+    }
+
+    &__footer {
+        display: flex;
+        margin: 2.5rem 0 0.5rem;
+    }
+
+    &__footer_end {
+        justify-content: flex-end;
+    }
+
+    &__footer_between {
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__submit {
+        position: relative;
+        padding-left: 5rem;
+    }
+
+    &__submit-loader {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+
+    &__link {
+
+    }
+
+    &__flash {
+        margin-bottom: 1.5rem;
+    }
+}

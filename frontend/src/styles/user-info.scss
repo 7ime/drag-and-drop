@@ -1,0 +1,27 @@
+.user-info {
+    position: relative;
+
+    &__avatar {
+        position: absolute;
+        top: 50%;
+        left: 0;
+        font-size: 1.2rem;
+        transform: translateY(-50%);
+
+        & span {
+            font-size: 2rem;
+        }
+    }
+
+    &__content {
+        padding-left: 4.5rem;
+    }
+
+    &__name {
+        font-weight: bold;
+    }
+
+    &__email {
+        font-size: 1.2rem;
+    }
+}

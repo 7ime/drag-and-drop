@@ -1,0 +1,59 @@
+$font: Roboto, sans-serif;
+$icon: 'FontAwesome';
+
+$purple: #6861CE;
+
+$orange: #F5B405;
+
+$yellow: #FFCC00;
+
+$green_dark: #007700;
+$green: #53B446;
+$green_light: #A3C293;
+$green_light_super: #FCFFF5;
+
+$red: #F04D42;
+$red_light: #F2AB99;
+$red_light_easy: #FFEFE9;
+
+$blue_dark: #26416C;
+$blue: #365D98;
+$blue_light: #4285F4;
+$blue_light_easy: #E3EDFD;
+$blue_light_super: #F7F7F7;
+
+$black_light: #3B455E;
+$black_medium: #222; 
+
+$grey: #575962;
+$grey_light: #8d9498;
+$grey_light_medium: #dedede;
+$grey_light_middle: #E0E1E2;
+$grey_light_easy: #eaeaea;
+$grey_light_strong: #F5F5F5;
+$grey_light_super: #F9FBFD; 
+
+$primary: $blue;
+$secondary: $green;
+$warning: $red;
+$boxshadow_c: rgba(#000, 0.3);
+$boxshadow_c_light: rgba(#000, 0.06);
+
+$text_c: $black_medium;
+$separate_c: $grey_light_easy;
+$transition: 0.15s ease-in-out;
+
+$bdrs: 4px;
+
+:root {
+    --menu-ident-x: 15px;
+    --menu-width: 270px;
+    --bar-h: 60px;
+    --menu-h: 50px;
+    --segment-margin-y: 15px;
+    --margin-y: 15px;
+
+    @media (max-width: 1440px) {
+        --menu-width: 250px;
+    }
+}

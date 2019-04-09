@@ -1,0 +1,68 @@
+.select {
+    position: relative;
+    outline: none;
+
+    &__input {
+        display: none;
+    }
+
+    &__info {
+        cursor: pointer;
+        font-size: 1.4rem;
+        line-height: 1.15;
+        min-height: 1.55rem;
+    }
+
+    &__icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 3rem;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: $primary;
+    }
+
+    &__menu {
+        display: none;
+        position: absolute;
+        top: 5rem;
+        left: -1px;
+        width: calc(100% + 2px);
+        max-height: 200px;
+        overflow: hidden;
+        background-color: #fff;
+        box-shadow: 0 3px 10px rgba(0,0,0,.15);
+        z-index: 100;
+
+        &.is_show {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+
+    &__menu-inner {
+        overflow: hidden;
+        overflow-y: auto;
+    }
+
+    &__menu-item {
+        border-bottom: 1px solid #f7f7f7;
+        cursor: pointer;
+        padding: 1rem 1.3rem;
+        font-size: 1.3rem;
+        color: $grey;
+
+        &:first-letter {
+            text-transform: uppercase;
+        }
+
+        &:hover {
+            color: $primary;
+            background-color: $blue_light_easy;
+            border-color: transparent;
+        }
+    }
+}

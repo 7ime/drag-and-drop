@@ -1,0 +1,82 @@
+@import '../../styles/root';
+
+.card {
+    position: relative;
+    cursor: pointer;
+    background-color: #fff;
+    border: 1px solid $grey_light_easy;
+    border-radius: $bdrs;
+    padding: 15px;
+    transition: 0.1s ease-in-out;
+    z-index: 2;
+
+    &.is_hidden {
+        display: none;
+    }
+
+    &.is_move {
+        transform: translateY(30px);
+        position: relative;
+        z-index: 1;
+        opacity: 0.4;
+
+        &:before {
+            position: absolute;
+            content: '';
+            width: 100%;
+            height: 20px;
+            border-radius: $bdrs;
+            border: 1px dashed $primary;
+            top: -35px;
+            left: 0;
+        }
+    }
+
+    &.is_drag {
+        border: 1px solid $green;
+    }
+
+    &__badge {
+        width: 50px;
+        height: 5px;
+        border-radius: $bdrs;
+
+        &_middle {
+            background-color: lighten($yellow, 20%);
+        }
+
+        &_high {
+            background-color: $orange;
+        }
+
+        &_easy {
+            background-color: $green;
+        }
+
+        &_long {
+            background-color: $blue;
+        }
+
+        &_quick {
+            background-color: $red;
+        }
+    }
+
+    &__title {
+        margin: 10px 0 5px;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    &__description {
+        font-size: 12px;
+        line-height: 15px;
+        color: $grey;
+    }
+}
+
+.stub {
+    background-color: $grey_light_easy;
+    border-radius: $bdrs;
+    margin-bottom: 15px;
+}

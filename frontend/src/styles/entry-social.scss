@@ -1,0 +1,49 @@
+.entry-social {
+    position: relative;
+    display: flex;
+    margin: 0 -0.5rem;
+
+    &__item {
+        margin: 0 0.5rem;
+    }
+
+    &__icon {
+        cursor: pointer;
+        width: 3rem;
+        height: 3rem;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: $transition;
+
+        &_vk {
+            background-color: #4A76A8;
+            color: lighten(#4A76A8, 15%);
+        }
+
+        &_twitter {
+            background-color: #4EA9F1;
+            color: lighten(#4EA9F1, 15%);
+        }
+
+        &_facebook {
+            background-color: #40549D;
+            color: lighten(#40549D, 15%);
+        }
+
+        &_google {
+            background-color: #DB4D46;
+            color: lighten(#DB4D46, 15%);
+        }
+
+        &:hover {
+            box-shadow: 0 0.5rem 2.5rem;
+        }
+
+
+        & .fa {
+            color: #fff;
+        }
+    }
+}

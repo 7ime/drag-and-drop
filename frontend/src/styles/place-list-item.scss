@@ -1,0 +1,60 @@
+.place-list-item {
+    &__content {
+        position: relative;
+        padding-right: 22rem;
+    }
+
+    &__thubnail {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 20rem;
+        height: 15rem;
+        border-radius: $bdrs;
+        background-size: cover;
+        background-position: 50% 50%;
+    }
+
+    &__info {
+
+    }
+
+    &__label {
+        margin-bottom: 0.7rem;
+    }
+
+    &__title {
+   
+    }
+
+    &__list {
+        margin-top: 0.5rem;
+    }
+
+    &__additional {
+        position: relative;
+        display: flex;
+        margin: 0.5rem -2rem 0;
+    }
+
+    &__additional-item {
+        padding: 0 2rem;
+    }
+
+    &__footer {
+        margin-top: 2rem;
+        // // padding-top: 1rem;
+        // // border-top: 1px solid $grey_light_easy;
+    }
+
+    &__btn-group {
+        position: relative;
+        display: flex;
+        // justify-content: flex-end;
+        margin: 0 -0.5rem;
+    }
+
+    &__btn {
+        padding: 0 0.5rem;
+    }
+}

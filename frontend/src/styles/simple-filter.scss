@@ -1,0 +1,18 @@
+.simple-filter {
+    position: relative;
+
+    &__item {
+        cursor: pointer;
+        position: relative;
+        padding: 0.5rem 2rem;
+
+        &.is_active {
+            background-color: $blue_light_easy;
+            font-weight: 500;
+        }
+
+        &:hover {
+            background-color: $blue_light_easy;
+        }
+    }
+}

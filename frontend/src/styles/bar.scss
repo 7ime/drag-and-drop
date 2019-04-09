@@ -1,0 +1,80 @@
+.bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: var(--bar-height);
+    background-color: #fff;
+    // box-shadow: 0 0.1rem 3rem rgba(#000, 0.06);
+    border: 1px solid $grey_light_easy;
+    z-index: 101;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    &__container {
+        align-items: center;
+        width: 100%;
+    }
+
+    &__logo {
+        font-weight: bold;
+        font-size: 1.8rem;
+        line-height: 1.5rem;
+        padding-left: 0.5rem;
+
+        &::first-letter {
+            color: $blue;
+        }
+
+        & span {
+            font-weight: normal;
+        }
+    }
+
+    &__search-field {
+        max-width: 39rem;
+    }
+
+    &__trigger-menu {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        margin: 0 -0.5rem;
+    }
+
+    &__trigger-wrap {
+        position: relative;
+        padding: 0 0.5rem;
+    }
+
+    &__trigger {
+        cursor: pointer;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 4rem;
+        height: 4rem;
+        border-radius: 50%;
+        transition: 0.15s ease-in-out;
+        outline: none;
+
+        &:hover, &:focus {
+            background-color: $blue_light_easy;
+        }
+    }
+
+    &__trigger-icon {
+        font-size: 2rem;
+        color: $grey;
+
+        &_avatar {
+            font-size: 3rem;
+            color: $blue;
+        }
+    }
+
+    &__user-menu-dropdown {
+        min-width: 20rem;
+    }
+}

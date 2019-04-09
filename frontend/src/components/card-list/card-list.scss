@@ -1,0 +1,36 @@
+.card-list {
+    position: relative;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    &__container-wrap {
+        flex: 1;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        overflow-x: hidden;
+        overflow-y: auto;
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    & .card {
+        margin-bottom: 15px;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    
+}
+
+.card-list__fill {
+    // position: relative;
+    flex: 1;
+    // z-index: 5;
+}
