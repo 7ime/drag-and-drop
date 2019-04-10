@@ -15,4 +15,8 @@ body {
     color: $text_c;
     min-width: 1345px;
     overflow-x: hidden;
+
+    @media(max-width: 1345px) {
+        overflow-x: auto;
+    }
 }
