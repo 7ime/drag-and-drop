@@ -55,9 +55,8 @@ class CardList extends Component {
 
         const stub = document.querySelector('.stub');
 
-        // const underCardID = this.underCardIdHistory();
         const underCardID = stub.getAttribute('data-under-card-id');
-        console.log(typeof underCardID)
+        const last = stub.getAttribute('data-last');
 
         let copyDragCard = null;
 
@@ -66,32 +65,54 @@ class CardList extends Component {
             const newData = data.map((item) => {
                 const { name } = item;
 
-                if(name === newCol && underCardID) {
+                if(name === newCol) {
+                  
+                    if(underCardID) {
+                        item.cards.forEach((card, idx) => {
+                            if(card.id === dragCardID) {
+                                copyDragCard = card;
+    
+                                item.cards = [
+                                    ...item.cards.slice(0, idx),
+                                    ...item.cards.slice(idx+1)
+                                ]
+                            }
+                        });
+    
+                        item.cards.forEach((card, idx) => {
+                            if(card.id == underCardID) {
+                                const newCards = [
+                                    ...item.cards.slice(0, idx),
+                                    copyDragCard,
+                                    ...item.cards.slice(idx)
+                                ];
+    
+                                item.cards = newCards;
+                            }
+                        });
+    
+                        return item;
+                    }
 
-                    item.cards.forEach((card, idx) => {
-                        if(card.id === dragCardID) {
-                            copyDragCard = card;
+                    if(last) {
+                 
+                        item.cards.forEach((card, idx) => {
+                            if(card.id === dragCardID) {
+                               
+                                copyDragCard = card;
+                               
+    
+                                item.cards = [
+                                    ...item.cards.slice(0, idx),
+                                    ...item.cards.slice(idx+1),
+                                    copyDragCard
+                                ]
+                            }
+                        });
 
-                            item.cards = [
-                                ...item.cards.slice(0, idx),
-                                ...item.cards.slice(idx+1)
-                            ]
-                        }
-                    });
-
-                    item.cards.forEach((card, idx) => {
-                        if(card.id == underCardID) {
-                            const newCards = [
-                                ...item.cards.slice(0, idx),
-                                copyDragCard,
-                                ...item.cards.slice(idx)
-                            ];
-
-                            item.cards = newCards;
-                        }
-                    });
-
-                    return item;
+                        return item;
+                    }
+                    
                 } else {
                     return item;
                 }
@@ -122,7 +143,6 @@ class CardList extends Component {
   
                 if(item.name === newCol) {
                     if(underCardID) {
-                        console.log(underCardID)
                         item.cards.forEach((card, idx) => {
                             if(card.id == underCardID) {
                                 const newCards = [
@@ -135,7 +155,6 @@ class CardList extends Component {
                             }
                         });
                     } else {
-                        console.log('push')
                         item.cards.push(copyDragCard);
                     }
                 }
@@ -155,10 +174,17 @@ class CardList extends Component {
         const stub = document.createElement('div');
         stub.classList.add('stub');
         stub.style.minHeight = this.cardHeight + 'px';
+        
+
+        if(underCardId === 'last') {
+            stub.setAttribute('data-last', true)
+
+            return stub;
+        }
+
         if(underCardId) {
             stub.setAttribute('data-under-card-id', underCardId)
         }
-        
 
         return stub;
     }
@@ -200,7 +226,7 @@ class CardList extends Component {
 
                 this.removeStub();
             
-                parentUnderCard.insertBefore(this.createStub(null), underElem);
+                parentUnderCard.insertBefore(this.createStub('last'), underElem);
             }
         }
 
@@ -333,8 +359,7 @@ class CardList extends Component {
 
 
         return(
-            <div className="card-list"
-                    >
+            <div className="card-list">
                 <div 
                     className="card-list__container-wrap scrollbar card-list-container-js"
                     onDragEnter={this.handleDragEnter}

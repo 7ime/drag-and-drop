@@ -44,16 +44,3 @@ $separate_c: $grey_light_easy;
 $transition: 0.15s ease-in-out;
 
 $bdrs: 4px;
-
-:root {
-    --menu-ident-x: 15px;
-    --menu-width: 270px;
-    --bar-h: 60px;
-    --menu-h: 50px;
-    --segment-margin-y: 15px;
-    --margin-y: 15px;
-
-    @media (max-width: 1440px) {
-        --menu-width: 250px;
-    }
-}
