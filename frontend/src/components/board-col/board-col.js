@@ -23,7 +23,6 @@ class BoardCol extends Component {
         return false;
     }
 
-
     render() {
         const { id, title, cards, events } = this.props;
         return(

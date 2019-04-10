@@ -11,6 +11,7 @@ import {
     handleDragOver,
     handleDrop, 
     handleDragEnd,
+    handleMouseDown,
     clearBoardColIsActive,
     clearAfterDropOrEnd,
     createStub,
@@ -34,6 +35,7 @@ class Board extends Component {
         this.handleDragOver         = handleDragOver.bind(this);
         this.handleDrop             = handleDrop.bind(this);
         this.handleDragEnd          = handleDragEnd.bind(this);
+        this.handleMouseDown        = handleMouseDown.bind(this);
 
         this.clearBoardColIsActive  = clearBoardColIsActive.bind(this);
         this.clearAfterDropOrEnd    = clearAfterDropOrEnd.bind(this);
@@ -47,7 +49,7 @@ class Board extends Component {
         const cols = this.getCols(this.props.boardData);
 
         return(
-            <div className="board">
+            <div className="board" onMouseDown={this.handleMouseDown}>
                 {cols}
             </div>
         )

@@ -5,6 +5,7 @@ import { handleDragLeave } from './handle-drag-leave';
 import { handleDragOver } from './handle-drag-over';
 import { handleDrop } from './handle-drop';
 import { handleDragEnd } from './handle-drag-end';
+import { handleMouseDown } from './handle-mouse-down';
 
 import { clearBoardColIsActive } from './clear-board-col-is-active';
 import { clearAfterDropOrEnd } from './clear-after-drop-end';
@@ -21,6 +22,7 @@ export {
     handleDragOver,
     handleDrop,
     handleDragEnd,
+    handleMouseDown,
     clearBoardColIsActive,
     clearAfterDropOrEnd,
     createStub,
