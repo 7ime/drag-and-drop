@@ -16,10 +16,18 @@
         padding: 15px 15px 0;
         display: flex;
         flex-direction: column;
+
+        @media(max-width: 1366px) {
+            padding: 10px 10px 0;
+        }
     }
 
     & .card {
         margin-bottom: 15px;
+
+        @media(max-width: 1366px) {
+            margin-bottom: 10px;
+        }
 
         &:last-child {
             margin-bottom: 0;
@@ -29,5 +37,9 @@
     &__fill {
         flex: 1;
         min-height: 15px;
+
+        @media(max-width: 1366px) {
+            min-height: 10px;
+        }
     }
 }
