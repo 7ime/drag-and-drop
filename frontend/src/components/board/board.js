@@ -42,7 +42,7 @@ class Board extends Component {
 
         const { boardData, boardDataUpdate } = this.props;
 
-        const newColID = e.currentTarget.closest('.board-col').dataset.col; // Индификатор колонки в которую перетянули карточку
+        const newColID = e.currentTarget.closest('.board-col').getAttribute('data-col'); // Индификатор колонки в которую перетянули карточку
         const oldColID = e.dataTransfer.getData('col'); // Индификатор колонки из которой перетянули карточку
 
         const dragCardID = e.dataTransfer.getData('card-id'); // Индификатор перетягиваемой карточки
@@ -220,7 +220,7 @@ class Board extends Component {
                 }
             }
 
-            const underCardId = underCard.dataset.cardId;
+            const underCardId = underCard.getAttribute('data-card-id');
 
             this.removeStub();
         
@@ -247,8 +247,9 @@ class Board extends Component {
         this.cardHeight = card.offsetHeight;
 
         dt.effectAllowed='move';
-        dt.setData('card-id', card.dataset.cardId);
-        dt.setData('col', col.dataset.col);
+
+        dt.setData('card-id', card.getAttribute('data-card-id'));
+        dt.setData('col', col.getAttribute('data-col'));
 
         col.classList.add('is_active');
     }
