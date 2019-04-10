@@ -203,12 +203,23 @@ class Board extends Component {
 
             return false;
         }
-
+        
         const underElem = document.elementFromPoint(e.clientX, e.clientY);
         const underCard = underElem.closest('.card');
 
         if(underCard) {
             const parentUnderCard = underCard.parentNode;
+            const underCardHeight = underCard.clientHeight;
+            const { top } = underCard.getBoundingClientRect();
+
+            if(underCard.nextElementSibling.classList.contains('card-list-fill-js')) {
+                if(Math.round(top + (underCardHeight / 2)) < e.clientY) {
+                    this.removeStub();
+                    parentUnderCard.insertBefore(this.createStub('last'), underCard.nextElementSibling);
+                    return false;
+                }
+            }
+
             const underCardId = underCard.dataset.cardId;
 
             this.removeStub();

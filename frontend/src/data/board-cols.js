@@ -11,7 +11,7 @@ const arrCols = arrNameCols.map((item) => {
     newItem.id = 'col_' + prefix;
     newItem.title = item;
 
-    newItem.cards = getCards(randomInteger(0, 10), prefix);
+    newItem.cards = getCards(randomInteger(5, 7), prefix);
 
     return newItem;
 });
