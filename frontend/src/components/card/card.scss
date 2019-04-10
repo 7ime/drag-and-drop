@@ -37,16 +37,18 @@
     }
 
     &__badge {
-        width: 50px;
-        height: 5px;
+        display: inline-flex;
+        padding: 0 5px;
         border-radius: $bdrs;
+        color: #ffff;
+        font-size: 12px;
 
         &_base {
             background-color: $green;
         }
 
         &_light {
-            background-color: lighten($yellow, 20%);
+            background-color: lighten($primary, 20%);
         }
 
         &_middle {
