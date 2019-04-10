@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import { withBoardContext } from '../hoc';
-import Card from '../card'
+import Card from '../card';
+
+import { boardDataUpdate } from '../../actions';
 
 import './card-list.scss';
 
@@ -9,16 +11,6 @@ class CardList extends Component {
 
     countForDragEnterLeave = 0;
     cardHeight = 0;
-
-    underCardIdHistory = (...arg) => {
-        const { provaider: { setUnderCardIdHistory, getUnderCardIdHistory }} = this.props;
-
-        if(arg.length) {
-            setUnderCardIdHistory(arg[0]);
-        }
-        
-        return getUnderCardIdHistory();
-    }
 
     handleDragEnter = (e) => {
         this.countForDragEnterLeave++;
@@ -46,123 +38,122 @@ class CardList extends Component {
     handleDrop = (e) => {
         e.preventDefault();
 
-        const { data, customSetState } = this.props.provaider;
+        const { boardData, dispatch } = this.props;
 
-        const newCol = e.currentTarget.closest('.board-col').dataset.col;
-        const oldCol = e.dataTransfer.getData('col');
- 
-        const dragCardID = e.dataTransfer.getData('card-id');
+        const newColID = e.currentTarget.closest('.board-col').dataset.col; // Индификатор колонки в которую перетянули карточку
+        const oldColID = e.dataTransfer.getData('col'); // Индификатор колонки из которой перетянули карточку
 
-        const stub = document.querySelector('.stub');
+        const dragCardID = e.dataTransfer.getData('card-id'); // Индификатор перетягиваемой карточки
 
-        const underCardID = stub.getAttribute('data-under-card-id');
-        const last = stub.getAttribute('data-last');
+        const stub = document.querySelector('.stub'); // Заглушка
+
+        const underCardID = stub.getAttribute('data-under-card-id'); // Индификатор карточки, которая находиться под перетягиваемой
+        const cardIsLast = stub.getAttribute('data-card-is-last'); // Сигнализирует, что перетягиваемая карточка в конце
 
         let copyDragCard = null;
 
-        if(newCol === oldCol) {
+        // Если ID клонок совпадают, то значит, что карточка находится в той же колонке
+        if(newColID === oldColID) {
+            // Трансформируем старый массив всех данных доски
+            const newBoardData = boardData.map((col) => {
+                // Так как мы перебераем все колонки, то ищем ту колонку в которую перетянули карточку
+                if(col.id === newColID) {
+                    // Формируем массив катрточек без перетягиваемой. 
+                    const cardsWithoutDragCard = col.cards.filter((card, idx) => {
+                        if(card.id == dragCardID) {
+                            copyDragCard = card;
+                            return false;
+                        } 
 
-            const newData = data.map((item) => {
-                const { name } = item;
+                        return true;
+                    });
 
-                if(name === newCol) {
-                  
+                    // Если есть id карточки, над которой расположиться перетаскиваемая карточка
                     if(underCardID) {
-                        item.cards.forEach((card, idx) => {
-                            if(card.id === dragCardID) {
-                                copyDragCard = card;
-    
-                                item.cards = [
-                                    ...item.cards.slice(0, idx),
-                                    ...item.cards.slice(idx+1)
-                                ]
-                            }
-                        });
-    
-                        item.cards.forEach((card, idx) => {
-                            if(card.id == underCardID) {
-                                const newCards = [
-                                    ...item.cards.slice(0, idx),
-                                    copyDragCard,
-                                    ...item.cards.slice(idx)
-                                ];
-    
-                                item.cards = newCards;
-                            }
-                        });
-    
-                        return item;
+                        // Нужно получить индекс карточки, над которой расположиться перетаскиваемая карточка
+                        const idxUnderCard = cardsWithoutDragCard.findIndex((item) => item.id == underCardID);
+
+                        return {
+                            ...col,
+                            cards: [
+                                ...cardsWithoutDragCard.slice(0, idxUnderCard),
+                                copyDragCard,
+                                ...cardsWithoutDragCard.slice(idxUnderCard)
+                            ]
+                        };
                     }
 
-                    if(last) {
-                 
-                        item.cards.forEach((card, idx) => {
-                            if(card.id === dragCardID) {
-                               
-                                copyDragCard = card;
-                               
-    
-                                item.cards = [
-                                    ...item.cards.slice(0, idx),
-                                    ...item.cards.slice(idx+1),
-                                    copyDragCard
-                                ]
-                            }
-                        });
-
-                        return item;
+                    // Если перетаскиваемая карточка последняя, то ...
+                    if(cardIsLast) {
+                        return {
+                            ...col,
+                            cards: [
+                                ...cardsWithoutDragCard,
+                                copyDragCard,
+                            ]
+                        };
                     }
                     
                 } else {
-                    return item;
+                    // Возвращаем колонку, которая не изменилась.
+                    return col;
                 }
             })
 
-            customSetState(newData);
+            dispatch(boardDataUpdate(newBoardData));
+
         } else {
-            const newDataWithoutDragCard = data.map((item) => {
-                if(item.name === oldCol) {
-                    const newCards = item.cards.filter((card) => {
-      
+            const newBoardDataWithoutDragCard = boardData.map((col) => {
+                if(col.id === oldColID) {
+                    const cardsWithoutDragCard = col.cards.filter((card) => {
                         if(card.id === dragCardID) {
                             copyDragCard = card;
 
                             return false;
-                        } else {
-                            return true;
                         }
+
+                        return true;
                     })
 
-                    item.cards = newCards;
+                    return {
+                        ...col,
+                        cards: [
+                            ...cardsWithoutDragCard
+                        ]
+                    }
                 }
             
-                return item;
+                return col;
             });
 
-            const newData = newDataWithoutDragCard.map((item) => {
-  
-                if(item.name === newCol) {
+            const newBoardData = newBoardDataWithoutDragCard.map((col) => {
+                if(col.id === newColID) {
                     if(underCardID) {
-                        item.cards.forEach((card, idx) => {
-                            if(card.id == underCardID) {
-                                const newCards = [
-                                    ...item.cards.slice(0, idx),
-                                    copyDragCard,
-                                    ...item.cards.slice(idx)
-                                ];
-    
-                                item.cards = newCards;
-                            }
-                        });
+                        const idxUnderCard = col.cards.findIndex((card) => card.id == underCardID);
+
+                        return {
+                            ...col,
+                            cards: [
+                                ...col.cards.slice(0, idxUnderCard),
+                                copyDragCard,
+                                ...col.cards.slice(idxUnderCard),
+                            ]
+                        }
                     } else {
-                        item.cards.push(copyDragCard);
+                        return {
+                            ...col,
+                            cards: [
+                                ...col.cards,
+                                copyDragCard
+                            ]
+                        }
                     }
                 }
 
-                return item;
+                return col;
             });
 
-            customSetState(newData);
+            dispatch(boardDataUpdate(newBoardData));
         }
 
         this.clearAfterDropOrEnd();
@@ -177,7 +168,7 @@ class CardList extends Component {
         
 
         if(underCardId === 'last') {
-            stub.setAttribute('data-last', true)
+            stub.setAttribute('data-card-is-last', true)
 
             return stub;
         }
@@ -229,50 +220,6 @@ class CardList extends Component {
                 parentUnderCard.insertBefore(this.createStub('last'), underElem);
             }
         }
-
-
-        
-      
-        // if(!document.querySelector('.card.is_move')) {
-        //     this.underCardIdHistory(null);
-        // }
-
-        // if(underCard) {
-        //     const cardId = e.target.dataset.cardId;
-        //     const underCardId = underCard.dataset.cardId;
-
-        //     const parent = underCard.closest('.card-list-container-js');
-
-        //     const stub = document.createElement('div');
-        //     stub.classList.add('stub');
-        //     stub.style.height = this.cardHeight + 'px';
-
-        //     parent.insertBefore(stub, underCard);
-
-        //     if(cardId !== underCardId) {
-        //         this.underCardIdHistory(underCardId);
- 
-        //         if(!underCard.classList.contains('is_move')) {
-        //             this.clearIsMove();
-        //             underCard.classList.add('is_move');
-
-        //         } 
-        //     } else {
-        //         this.underCardIdHistory(null);
-        //     } 
-
-        // } else {
-        //     const stub = document.querySelector('.stub');
-
-        //     if(stub) {
-        //         stub.parentNode.removeChild(stub);
-        //     }
-
-        //     if(underElem && underElem.classList.contains('card-list-fill-js')) {
-        //         this.clearIsMove();
-        //         this.underCardIdHistory(null);
-        //     }
-        // }
     }
 
     handleDragStart = (e) => {
@@ -376,4 +323,10 @@ class CardList extends Component {
     }
 }
 
-export default withBoardContext(CardList);
+const mapStateToProps = ({ boardData }) => ({ boardData});
+
+// const mapDispatchToProps = (dispatch, ownProps) => ({
+//     boardDataUpdate: () => dispatch(boardDataUpdate(ownProps)) 
+// })
+
+export default connect(mapStateToProps)(CardList);

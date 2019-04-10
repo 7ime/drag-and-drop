@@ -41,23 +41,19 @@
         height: 5px;
         border-radius: $bdrs;
 
-        &_middle {
-            background-color: lighten($yellow, 20%);
-        }
-
-        &_high {
-            background-color: $orange;
-        }
-
-        &_easy {
+        &_base {
             background-color: $green;
         }
 
-        &_long {
-            background-color: $blue;
+        &_light {
+            background-color: lighten($yellow, 20%);
         }
 
-        &_quick {
+        &_middle {
+            background-color: $orange;
+        }
+
+        &_high {
             background-color: $red;
         }
     }
@@ -66,12 +62,24 @@
         margin: 10px 0 5px;
         font-weight: bold;
         font-size: 16px;
+
+        &::first-letter {
+            text-transform: uppercase;
+        }
     }
 
     &__description {
         font-size: 12px;
         line-height: 15px;
         color: $grey;
+    }
+
+    &__date {
+        margin-top: 5px;
+        display: flex;
+        justify-content: flex-end;
+        font-size: 10px;
+        color: $grey_light;
     }
 }
 

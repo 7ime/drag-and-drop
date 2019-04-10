@@ -1,0 +1,1 @@
+export const BOARD_DATA_UPDATE = 'BOARD_DATA_UPDATE';
