@@ -23,7 +23,7 @@ export function handleDrop(e) {
             if(col.id === newColID) {
                 // Формируем массив катрточек без перетягиваемой. 
                 const cardsWithoutDragCard = col.cards.filter((card, idx) => {
-                    if(card.id == dragCardID) {
+                    if(card.id === dragCardID) {
                         copyDragCard = card;
                         return false;
                     } 
@@ -34,7 +34,7 @@ export function handleDrop(e) {
                 // Если есть id карточки, над которой расположиться перетаскиваемая карточка
                 if(underCardID) {
                     // Нужно получить индекс карточки, над которой расположиться перетаскиваемая карточка
-                    const idxUnderCard = cardsWithoutDragCard.findIndex((item) => item.id == underCardID);
+                    const idxUnderCard = cardsWithoutDragCard.findIndex((item) => item.id === underCardID);
 
                     return {
                         ...col,
@@ -94,7 +94,7 @@ export function handleDrop(e) {
         const newBoardData = newBoardDataWithoutDragCard.map((col) => {
             if(col.id === newColID) {
                 if(underCardID) {
-                    const idxUnderCard = col.cards.findIndex((card) => card.id == underCardID);
+                    const idxUnderCard = col.cards.findIndex((card) => card.id === underCardID);
 
                     return {
                         ...col,
