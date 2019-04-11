@@ -1,5 +1,7 @@
 # О проделанной работе
 Для реализации задачи использовал технологию **Drag And Drop HTML5** совместно с *React* и *Redux*.
+
+Просмотреть демо [на гитхабе](https://7ime.github.io/drag-and-drop/frontend/build/index.html "демо") https://7ime.github.io/drag-and-drop/frontend/build/index.html.
 ***
 ### Затраченное время 
 20 часов.
